@@ -16,19 +16,20 @@ import sys
 #
 
 def minimumNumber(n, password):
-    # Return the minimum number of characters to make the password strong
-    count = 0
-    if not any(c.islower() for c in password):
-        count += 1
-    if not any(c.isupper() for c in password):
-        count += 1
-    if not any(c.isdigit() for c in password):
-        count += 1
-    if not any(c.isalpha() for c in password):
-        count += 1
-    if len(password) < 6:
-        count += 6 - len(password)
-    return count
+    # Write your code here
+    spl = '!@#$%^&*()-+'
+    l = [0,0,0,0]
+    for char in password:
+        if char.isdigit():
+            l[0] = 1
+        elif char.islower():
+            l[1] = 1
+        elif char.isupper():
+            l[2] = 1
+        elif char in spl:
+            l[3] = 1
+    return max (6 - len(password) , 4 - sum(l))
+
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
